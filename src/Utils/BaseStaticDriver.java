@@ -30,7 +30,6 @@ public class BaseStaticDriver {
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     }
