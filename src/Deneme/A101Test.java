@@ -71,11 +71,8 @@ public class A101Test extends BaseStaticDriver {
         actions.sendKeys(Keys.TAB).build().perform();
         WebElement save = driver.findElement(By.xpath("//button[@class='button green js-set-country js-prevent-emoji'] "));
         save.click();
-
         WebElement scotty = driver.findElement(By.xpath("//ul[@class='js-shipping-list']"));
         scotty.click();
-
-        //   //ul[@class='js-shipping-list']
         WebElement saveGo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='button block green js-proceed-button']")));
         saveGo.click();
         WebElement cardNameLast = driver.findElement(By.xpath(" (//input[@name='name'])[2]"));
