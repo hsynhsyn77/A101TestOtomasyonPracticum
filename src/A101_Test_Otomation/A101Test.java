@@ -1,8 +1,7 @@
-package Deneme;
+package A101_Test_Otomation;
 
 
 import Utils.BaseStaticDriver;
-import com.sun.org.apache.xalan.internal.xsltc.runtime.ErrorMessages_zh_CN;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
