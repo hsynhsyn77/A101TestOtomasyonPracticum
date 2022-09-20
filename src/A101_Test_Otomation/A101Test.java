@@ -90,6 +90,7 @@ public class A101Test extends BaseStaticDriver {
         actions.sendKeys(Keys.SPACE).build().perform();
         WebElement ordercomp = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(" (//div[@id='js-orders-complete-button']//button)[2]")));
         ordercomp.click();
+        ordercomp.sendKeys(Keys.ENTER);
         wait.until(ExpectedConditions.urlContains("master"));
         Assert.assertTrue("ödeme sayfasına geçildi", driver.getCurrentUrl().contains("master"));
         driver.quit();
