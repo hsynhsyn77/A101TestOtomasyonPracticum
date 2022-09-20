@@ -2,6 +2,7 @@ package Deneme;
 
 
 import Utils.BaseStaticDriver;
+import com.sun.org.apache.xalan.internal.xsltc.runtime.ErrorMessages_zh_CN;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,10 +15,8 @@ import java.util.Random;
 public class A101Test extends BaseStaticDriver {
     public static void main(String[] args) {
         driver.get("https://www.a101.com.tr/");
-
         WebElement kabulEt = driver.findElement(By.xpath("//button[contains(text(),'Kabul Et')]"));
         kabulEt.click();
-
         WebElement giyimAks = driver.findElement(By.cssSelector("[title='GİYİM & AKSESUAR']"));
         Actions actions = new Actions(driver);
         actions.moveToElement(giyimAks).build().perform();
@@ -28,7 +27,7 @@ public class A101Test extends BaseStaticDriver {
         syhCrp.click();
         WebElement syhCrp2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='product-actions']")));
         syhCrp2.click();
-        Assert.assertTrue(driver.findElement(By.cssSelector("[class='selected-variant-text'] span")).getText().toLowerCase().contains("siyah"));
+        Assert.assertTrue("siyah çorap seçildi", driver.findElement(By.cssSelector("[class='selected-variant-text'] span")).getText().toLowerCase().contains("siyah"));
         WebElement addToBasket = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='add-to-basket button green block with-icon js-add-basket']")));
         addToBasket.click();
         WebElement viewCart = driver.findElement(By.linkText("Sepeti Görüntüle"));
@@ -76,17 +75,24 @@ public class A101Test extends BaseStaticDriver {
         WebElement saveGo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='button block green js-proceed-button']")));
         saveGo.click();
         WebElement cardNameLast = driver.findElement(By.xpath(" (//input[@name='name'])[2]"));
-        cardNameLast.sendKeys("huseyın");
+        cardNameLast.sendKeys("Billy Henderson");
         WebElement cardNo = driver.findElement(By.xpath(" //input[@class='js-masterpassbin-payment-card']"));
-        cardNo.sendKeys("1234432154323243");
+        cardNo.sendKeys("4121707792006419,");
         WebElement cardMonth = driver.findElement(By.xpath(" (//select[@name='card_month'])[2]"));
         Select cardmnth = new Select(cardMonth);
-        cardmnth.selectByVisibleText("7");
+        cardmnth.selectByVisibleText("4");
         WebElement cardYear = driver.findElement(By.xpath(" (//select[@name='card_year'])[2]"));
         Select cardYr = new Select(cardYear);
-        cardYr.selectByVisibleText("2025");
+        cardYr.selectByVisibleText("2026");
         WebElement cvc = driver.findElement(By.xpath(" (//input[@name='card_cvv'])[2]"));
-        cvc.sendKeys("143");
+        cvc.sendKeys("132");
+        actions.sendKeys(Keys.TAB).build().perform();
+        actions.sendKeys(Keys.TAB).build().perform();
+        actions.sendKeys(Keys.SPACE).build().perform();
+        WebElement ordercomp = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(" (//div[@id='js-orders-complete-button']//button)[2]")));
+        ordercomp.click();
+        wait.until(ExpectedConditions.urlContains("master"));
+        Assert.assertTrue("ödeme sayfasına geçildi", driver.getCurrentUrl().contains("master"));
         driver.quit();
     }
 
