@@ -92,7 +92,7 @@ public class A101Test extends BaseStaticDriver {
         ordercomp.click();
         ordercomp.sendKeys(Keys.ENTER);
         wait.until(ExpectedConditions.urlContains("master"));
-        Assert.assertTrue("ödeme sayfasına geçildi", driver.getCurrentUrl().contains("master"));
+        Assert.assertTrue("Geçilmedi", driver.getCurrentUrl().contains("master"));
         driver.quit();
     }
 
