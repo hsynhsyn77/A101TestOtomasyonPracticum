@@ -64,7 +64,6 @@ public class A101Test extends BaseStaticDriver {
 
         WebElement township = driver.findElement(By.xpath(" //select[@class='js-township']"));
         Select townshipdrop = new Select(township);
-        //wait.until(ExpectedConditions.elementToBeClickable(By.xpath(" //select[@class='js-township']")));
         int townshipdropdown = driver.findElements(By.cssSelector("select[class='js-township']>option")).size();
         Random random2 = new Random();
         int index2 = random2.nextInt(townshipdropdown);
