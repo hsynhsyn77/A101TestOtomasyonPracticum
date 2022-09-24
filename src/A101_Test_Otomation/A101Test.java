@@ -24,9 +24,9 @@ public class A101Test extends BaseStaticDriver {
         dızAltCrp.click();
         WebElement syhCrp = driver.findElement(By.cssSelector("[value='SİYAH']"));
         syhCrp.click();
-        WebElement syhCrp2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='product-actions']")));
+        WebElement syhCrp2 = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[@class='hidden-mobile'])[1]")));
         syhCrp2.click();
-        Assert.assertTrue("siyah çorap seçildi", driver.findElement(By.cssSelector("[class='selected-variant-text'] span")).getText().toLowerCase().contains("siyah"));
+        Assert.assertTrue("siyah değil", driver.findElement(By.cssSelector("[class='selected-variant-text'] span")).getText().toLowerCase().contains("siyah"));
         WebElement addToBasket = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='add-to-basket button green block with-icon js-add-basket']")));
         addToBasket.click();
         WebElement viewCart = driver.findElement(By.linkText("Sepeti Görüntüle"));
@@ -35,13 +35,15 @@ public class A101Test extends BaseStaticDriver {
         cartCheck.click();
         WebElement goOn = driver.findElement(By.linkText("ÜYE OLMADAN DEVAM ET"));
         goOn.click();
+
         WebElement emailTextBx = driver.findElement(By.xpath("//input[@name='user_email']"));
         emailTextBx.click();
         Random randomGenerator = new Random();
         int randomInt = randomGenerator.nextInt(1000);
-        emailTextBx.sendKeys("username" + randomInt + "@gmail.com");
+        emailTextBx.sendKeys("a101Test" + randomInt + "@gmail.com");
         WebElement mailBtn = driver.findElement(By.xpath("//button[@class='button block green']"));
         mailBtn.click();
+
         WebElement nevAdress = driver.findElement(By.xpath("//a[@class='new-address js-new-address']"));
         nevAdress.click();
         WebElement adressBas = driver.findElement(By.xpath("//input[@placeholder='Ev adresim, iş adresim vb.']"));
@@ -52,31 +54,44 @@ public class A101Test extends BaseStaticDriver {
         lastName.sendKeys("HUSEYIN");
         WebElement phoneNu = driver.findElement(By.xpath("//input[@name='phone_number']"));
         phoneNu.sendKeys("5552325060");
+
         WebElement cityMenu = driver.findElement(By.xpath("//select[@class='js-cities']"));
         Select city = new Select(cityMenu);
-        city.selectByVisibleText("İZMİR");
-        WebElement districtMenu = driver.findElement(By.xpath(" //select[@class='js-township']"));
-        Select district = new Select(districtMenu);
-        district.selectByVisibleText("BORNOVA");
-        actions.sendKeys(Keys.TAB).build().perform();
-        WebElement neighbourhoodMenu = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@name='district']")));
-        actions.moveToElement(neighbourhoodMenu).sendKeys(Keys.ENTER).build().perform();
-        Select neighbour = new Select(neighbourhoodMenu);
-        neighbour.selectByVisibleText("ATATÜRK MAH");
-        actions.sendKeys(Keys.TAB).build().perform();
+        int citydropdown = driver.findElements(By.cssSelector("select[class='js-cities']>option")).size();
+        Random random = new Random();
+        int index1 = random.nextInt(citydropdown);
+        city.selectByIndex(index1);
+
+        WebElement township = driver.findElement(By.xpath(" //select[@class='js-township']"));
+        Select townshipdrop = new Select(township);
+        //wait.until(ExpectedConditions.elementToBeClickable(By.xpath(" //select[@class='js-township']")));
+        int townshipdropdown = driver.findElements(By.cssSelector("select[class='js-township']>option")).size();
+        Random random2 = new Random();
+        int index2 = random2.nextInt(townshipdropdown);
+        townshipdrop.selectByIndex(index2);
+
+        WebElement district = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@name='district']")));
+        actions.moveToElement(district).sendKeys(Keys.ENTER).build().perform();
+        Select districtdrop = new Select(district);
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("select[name='district']>option")));
+        int districtdropdown = driver.findElements(By.cssSelector("select[name='district']>option")).size();
+        Random random3 = new Random();
+        int index3 = random3.nextInt(districtdropdown);
+        districtdrop.selectByIndex(index3);
+
         WebElement adress = driver.findElement(By.xpath("//textarea[@name='line']"));
-        adress.sendKeys("A101 mh. 11 sk. no:3 d:5 \nKarabağlar / IZMIR");
+        adress.sendKeys("A101 mh. 11 sk. no:3 d:5");
         actions.sendKeys(Keys.TAB).build().perform();
         WebElement save = driver.findElement(By.xpath("//button[@class='button green js-set-country js-prevent-emoji'] "));
         save.click();
-        WebElement scotty = driver.findElement(By.xpath("//ul[@class='js-shipping-list']"));
-        scotty.click();
+        WebElement cargo = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("label[class='js-checkout-cargo-item']")));
+        cargo.click();
         WebElement saveGo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='button block green js-proceed-button']")));
         saveGo.click();
         WebElement cardNameLast = driver.findElement(By.xpath(" (//input[@name='name'])[2]"));
         cardNameLast.sendKeys("Billy Henderson");
         WebElement cardNo = driver.findElement(By.xpath(" //input[@class='js-masterpassbin-payment-card']"));
-        cardNo.sendKeys("4121707792006419,");
+        cardNo.sendKeys("4121707792006419");
         WebElement cardMonth = driver.findElement(By.xpath(" (//select[@name='card_month'])[2]"));
         Select cardmnth = new Select(cardMonth);
         cardmnth.selectByVisibleText("4");
@@ -90,9 +105,10 @@ public class A101Test extends BaseStaticDriver {
         actions.sendKeys(Keys.SPACE).build().perform();
         WebElement ordercomp = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(" (//div[@id='js-orders-complete-button']//button)[2]")));
         ordercomp.click();
-        ordercomp.sendKeys(Keys.ENTER);
+
         wait.until(ExpectedConditions.urlContains("master"));
         Assert.assertTrue("Geçilmedi", driver.getCurrentUrl().contains("master"));
+        System.out.println("A101 Test tamamlandı.");
         driver.quit();
     }
 
