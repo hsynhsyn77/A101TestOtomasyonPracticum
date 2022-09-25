@@ -10,7 +10,6 @@ import org.junit.Assert;
 
 import java.util.Random;
 
-
 public class A101Test extends BaseStaticDriver {
     public static void main(String[] args) {
         driver.get("https://www.a101.com.tr/");
@@ -112,4 +111,7 @@ public class A101Test extends BaseStaticDriver {
     }
 
 }
+/**
+ * @outhor Hüseyin ŞİRİKÇİ 2022 A101 test çalışması.
+ */
 
