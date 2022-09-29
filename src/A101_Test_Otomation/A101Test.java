@@ -79,8 +79,8 @@ public class A101Test extends BaseStaticDriver {
 
         WebElement adress = driver.findElement(By.xpath("//textarea[@name='line']"));
         adress.sendKeys("A101 mh. 11 sk. no:3 d:5");
-        actions.sendKeys(Keys.TAB).build().perform();
-        WebElement save = driver.findElement(By.xpath("//button[@class='button green js-set-country js-prevent-emoji'] "));
+        //actions.sendKeys(Keys.TAB).build().perform();
+        WebElement save = driver.findElement(By.xpath("//button[@class='button green address-modal-submit-button js-set-country js-prevent-emoji js-address-form-submit-button'] "));
         save.click();
         WebElement cargo = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("label[class='js-checkout-cargo-item']")));
         cargo.click();
@@ -101,7 +101,7 @@ public class A101Test extends BaseStaticDriver {
         actions.sendKeys(Keys.TAB).build().perform();
         actions.sendKeys(Keys.TAB).build().perform();
         actions.sendKeys(Keys.SPACE).build().perform();
-        WebElement ordercomp = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(" (//div[@id='js-orders-complete-button']//button)[2]")));
+        WebElement ordercomp = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(" (//div[@id='js-orders-complete-button'])[2]")));
         ordercomp.click();
 
         wait.until(ExpectedConditions.urlContains("master"));
